@@ -65,12 +65,12 @@ PalletTown_EventScript_OakRatingScene::
 	applymovement OBJ_EVENT_ID_PLAYER, PalletTown_Movement_PlayerWalkToLabFromHouse
 	applymovement LOCALID_PROF_OAK, PalletTown_Movement_OakWalkToLabFromHouse
 	waitmovement 0
-	opendoor 19, 15
+	opendoor 23, 15
 	waitdooranim
 	applymovement LOCALID_PROF_OAK, PalletTown_Movement_OakEnterLab
 	applymovement OBJ_EVENT_ID_PLAYER, PalletTown_Movement_PlayerEnterLab
 	waitmovement 0
-	closedoor 19, 15
+	closedoor 23, 15
 	waitdooranim
 	setvar VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 7
 	setvar VAR_MAP_SCENE_PALLET_TOWN_OAK, 3
@@ -265,12 +265,12 @@ PalletTown_EventScript_OakTrigger::
 	call_if_eq VAR_TEMP_1, 1, PalletTown_EventScript_OakLeadPlayerToLabLeft
     call_if_eq VAR_TEMP_1, 2, PalletTown_EventScript_OakLeadPlayerToLabRight
 	call_if_eq VAR_TEMP_1, 3, PalletTown_EventScript_OakLeadPlayerToLabFarRight
-	opendoor 19, 15
+	opendoor 23, 15
 	waitdooranim
 	applymovement LOCALID_PROF_OAK, PalletTown_Movement_OakEnterLab
 	applymovement OBJ_EVENT_ID_PLAYER, PalletTown_Movement_PlayerEnterLab
 	waitmovement 0
-	closedoor 19, 15
+	closedoor 23, 15
 	waitdooranim
 	setvar VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 1
 	clearflag FLAG_HIDE_OAK_IN_HIS_LAB

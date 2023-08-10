@@ -724,7 +724,7 @@
     {
       "id": "LAYOUT_PALLET_TOWN",
       "name": "PalletTown_Layout",
-      "width": 26,
+      "width": 32,
       "height": 27,
       "border_width": 2,
       "border_height": 2,
@@ -856,7 +856,7 @@
     {
       "id": "LAYOUT_ROUTE1",
       "name": "Route1_Layout",
-      "width": 30,
+      "width": 32,
       "height": 39,
       "border_width": 2,
       "border_height": 2,
@@ -1096,7 +1096,7 @@
     {
       "id": "LAYOUT_ROUTE21_NORTH",
       "name": "Route21_North_Layout",
-      "width": 24,
+      "width": 30,
       "height": 50,
       "border_width": 2,
       "border_height": 2,
