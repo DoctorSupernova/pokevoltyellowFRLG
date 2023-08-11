@@ -1,3 +1,44 @@
+PalletTown_Text_OakThanksPidgey::
+    .string "OAK: Well, my good PIDGEY,\n"
+    .string "thank you for the help.\p"
+    .string "I think I understand your\n"
+    .string "habitat a little better now.$"
+    
+PalletTown_Text_OakIsGettingOld::
+    .string "It's a shame…\p"
+    .string "I'm getting too old to go out\n"
+    .string "as long as I used to.\p"
+    .string "I wonder if any of my old\n"
+    .string "friends feel this way…$"
+
+PalletTown_Text_OakSaysGoodbyeToPidgey::
+    .string "Haha! Oh, don't worry about me!\p"
+    .string "I've had plenty of adventures of my\n"
+    .string "own over all these years!\p"
+    .string "Fly along now, little one.$"
+
+PalletTown_Text_OakSeesPlayer::
+    .string "{PLAYER}?!$"
+
+PalletTown_Text_OakGetsAttacked::
+    .string "Hey! Wait!\n"
+    .string "Don't come closer!\p"
+    .string "What's gotten into you?\p"
+    .string "It's unsafe! Wild POKéMON\n"
+    .string "live in the tall grass!\p"
+    .string "Hmm? Wh-what's that?!$"
+
+PalletTown_Text_OakPostCatch::
+    .string "My, my…\p"
+    .string "I surely wouldn't have expected a\n"
+    .string "PIKACHU to appear around here!\p"
+    .string "…What's that? You saw this PIKACHU\n"
+    .string "outside your house last night?\p"
+    .string "Curiouser and curiouser…\p"
+    .string "Oh, of course! I promised to give\n"
+    .string "you your POKéMON today!\p"
+    .string "Here, come with me!$"
+
 PalletTown_Text_OakDontGoOut::
     .string "OAK: Hey! Wait!\n"
     .string "Don't go out!$"

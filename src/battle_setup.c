@@ -299,7 +299,7 @@ static void DoTrainerBattle(void)
 
 void StartOldManTutorialBattle(void)
 {
-    CreateMaleMon(&gEnemyParty[0], SPECIES_WEEDLE, 5);
+    CreateMon(&gEnemyParty[0], SPECIES_PIKACHU, 5, USE_RANDOM_IVS, FALSE, 0, OT_ID_PLAYER_ID, 0);
     LockPlayerFieldControls();
     gMain.savedCallback = CB2_ReturnToFieldContinueScriptPlayMapMusic;
     gBattleTypeFlags = BATTLE_TYPE_OLD_MAN_TUTORIAL;

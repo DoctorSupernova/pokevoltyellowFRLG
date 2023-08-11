@@ -1,5 +1,6 @@
 .equ LOCALID_SIGN_LADY, 1
 .equ LOCALID_PROF_OAK,  3
+.equ LOCALID_PIDGEY, 4
 
 .equ SIGN_LADY_READY, VAR_TEMP_2
 
@@ -27,12 +28,12 @@ PalletTown_EventScript_SetSignLadyDone::
 
 PalletTown_EventScript_SetSignLadyPos::
 	goto_if_set FLAG_PALLET_LADY_NOT_BLOCKING_SIGN, PalletTown_EventScript_MoveSignLadyToRouteEntrance
-	setobjectxyperm LOCALID_SIGN_LADY, 5, 15
+	setobjectxyperm LOCALID_SIGN_LADY, 12, 16
 	setobjectmovementtype LOCALID_SIGN_LADY, MOVEMENT_TYPE_FACE_UP
 	return
 
 PalletTown_EventScript_MoveSignLadyToRouteEntrance::
-	setobjectxyperm LOCALID_SIGN_LADY, 12, 2
+	setobjectxyperm LOCALID_SIGN_LADY, 18, 2
 	setobjectmovementtype LOCALID_SIGN_LADY, MOVEMENT_TYPE_FACE_DOWN
 	setvar SIGN_LADY_READY, TRUE
 	return
@@ -213,59 +214,90 @@ PalletTown_Movement_PlayerWalkToLabFromHouse::
     walk_up
 	step_end
 
+PalletTown_EventScript_OakCheckTrigger::
+    applymovement OBJ_EVENT_ID_PLAYER, PalletTown_Movement_SomehowThisPreventsASoftlock
+    clearflag FLAG_HIDE_OAK_IN_PALLET_TOWN
+    addobject LOCALID_PROF_OAK
+    end
+
 PalletTown_EventScript_OakTriggerFarLeft::
 	lockall
 	setvar VAR_TEMP_1, 0
-	goto PalletTown_EventScript_OakTrigger
+	goto PalletTown_EventScript_PikachuEncounterTrigger
 	end
 
 PalletTown_EventScript_OakTriggerLeft::
 	lockall
 	setvar VAR_TEMP_1, 1
-	goto PalletTown_EventScript_OakTrigger
+	goto PalletTown_EventScript_PikachuEncounterTrigger
 	end
 
 PalletTown_EventScript_OakTriggerRight::
 	lockall
 	setvar VAR_TEMP_1, 2
-	goto PalletTown_EventScript_OakTrigger
+	goto PalletTown_EventScript_PikachuEncounterTrigger
 	end
 
 PalletTown_EventScript_OakTriggerFarRight::
 	lockall
 	setvar VAR_TEMP_1, 3
-	goto PalletTown_EventScript_OakTrigger
+	goto PalletTown_EventScript_PikachuEncounterTrigger
 	end
 
-PalletTown_EventScript_OakTrigger::
-	famechecker FAMECHECKER_OAK, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
+PalletTown_EventScript_PikachuEncounterTrigger::
+    famechecker FAMECHECKER_OAK, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
 	textcolor NPC_TEXT_COLOR_MALE
-	delay 30
-	playbgm MUS_OAK, 0
-	message PalletTown_Text_OakDontGoOut
-	waitmessage
-	delay 85
-	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterDown
-	waitmovement 0
-	playse SE_PIN
+    playse SE_PIN
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_ExclamationMark
 	waitmovement 0
 	delay 30
-	addobject LOCALID_PROF_OAK
-    call_if_eq VAR_TEMP_1, 0, PalletTown_EventScript_OakEnterFarLeft
-	call_if_eq VAR_TEMP_1, 1, PalletTown_EventScript_OakEnterLeft
-	call_if_eq VAR_TEMP_1, 2, PalletTown_EventScript_OakEnterRight
-    call_if_eq VAR_TEMP_1, 3, PalletTown_EventScript_OakEnterFarRight
-	delay 30
-	msgbox PalletTown_Text_OakGrassUnsafeNeedMon
+    msgbox PalletTown_Text_OakThanksPidgey
 	closemessage
+    applymovement LOCALID_PROF_OAK, Common_Movement_WalkInPlaceFasterUp
+    waitmovement 0
 	delay 30
-	call_if_eq VAR_TEMP_1, 0, PalletTown_EventScript_OakLeadPlayerToLabFarLeft
-	call_if_eq VAR_TEMP_1, 1, PalletTown_EventScript_OakLeadPlayerToLabLeft
-    call_if_eq VAR_TEMP_1, 2, PalletTown_EventScript_OakLeadPlayerToLabRight
-	call_if_eq VAR_TEMP_1, 3, PalletTown_EventScript_OakLeadPlayerToLabFarRight
-	opendoor 23, 15
+    msgbox PalletTown_Text_OakIsGettingOld
+	closemessage
+    applymovement LOCALID_PIDGEY, PalletTown_Movement_PidgeyJump
+    playse SE_LEDGE
+    waitmovement 0
+    applymovement LOCALID_PIDGEY, PalletTown_Movement_PidgeyJump
+    playse SE_LEDGE
+    waitmovement 0
+    applymovement LOCALID_PIDGEY, Common_Movement_QuestionMark
+    playmoncry SPECIES_PIDGEY, CRY_MODE_ENCOUNTER
+	delay 30
+	waitmoncry
+    applymovement LOCALID_PROF_OAK, Common_Movement_WalkInPlaceFasterLeft
+    waitmovement 0
+	delay 30
+    msgbox PalletTown_Text_OakSaysGoodbyeToPidgey
+	closemessage
+    applymovement LOCALID_PIDGEY, PalletTown_Movement_PidgeyLeave
+    delay 30
+    applymovement LOCALID_PROF_OAK, Common_Movement_WalkInPlaceFasterDown
+    waitmovement 0
+    playse SE_PIN
+    applymovement LOCALID_PROF_OAK, Common_Movement_ExclamationMark
+	waitmovement 0
+	playbgm MUS_OAK, 0
+    msgbox PalletTown_Text_OakSeesPlayer
+	closemessage
+    call_if_eq VAR_TEMP_1, 0, PalletTown_EventScript_PlayerEnterGrassFarLeft
+	call_if_eq VAR_TEMP_1, 1, PalletTown_EventScript_PlayerEnterGrassLeft
+    call_if_eq VAR_TEMP_1, 2, PalletTown_EventScript_PlayerEnterGrassRight
+	call_if_eq VAR_TEMP_1, 3, PalletTown_EventScript_PlayerEnterGrassFarRight
+    delay 30
+    msgbox PalletTown_Text_OakGetsAttacked
+	closemessage
+    special StartOldManTutorialBattle
+	waitstate
+    lock
+    msgbox PalletTown_Text_OakPostCatch
+	closemessage
+    playbgm MUS_FOLLOW_ME, 0
+	call PalletTown_EventScript_OakLeadPlayerToLabFromGrass
+    opendoor 23, 15
 	waitdooranim
 	applymovement LOCALID_PROF_OAK, PalletTown_Movement_OakEnterLab
 	applymovement OBJ_EVENT_ID_PLAYER, PalletTown_Movement_PlayerEnterLab
@@ -282,88 +314,76 @@ PalletTown_EventScript_OakTrigger::
 	releaseall
 	end
 
-PalletTown_EventScript_OakEnterFarLeft::
-	applymovement LOCALID_PROF_OAK, PalletTown_Movement_OakEnterFarLeft
+PalletTown_EventScript_PlayerEnterGrassFarLeft::
+    applymovement OBJ_EVENT_ID_PLAYER, PalletTown_Movement_PlayerEnterGrassFarLeft
+    return
+
+PalletTown_EventScript_PlayerEnterGrassLeft::
+    applymovement OBJ_EVENT_ID_PLAYER, PalletTown_Movement_PlayerEnterGrassLeft
+    return
+
+PalletTown_EventScript_PlayerEnterGrassRight::
+    applymovement OBJ_EVENT_ID_PLAYER, PalletTown_Movement_PlayerEnterGrassRight
+    return
+
+PalletTown_EventScript_PlayerEnterGrassFarRight::
+    applymovement OBJ_EVENT_ID_PLAYER, PalletTown_Movement_PlayerEnterGrassFarRight
+    return
+
+PalletTown_EventScript_OakLeadPlayerToLabFromGrass::
+	applymovement LOCALID_PROF_OAK, PalletTown_Movement_OakStartWalkingToLabFromGrass
+    waitmovement 0
+    applymovement LOCALID_PROF_OAK, PalletTown_Movement_OakWalkToLabFromGrass
+	applymovement OBJ_EVENT_ID_PLAYER, PalletTown_Movement_PlayerWalkToLabFromGrass
 	waitmovement 0
 	return
 
-PalletTown_EventScript_OakEnterLeft::
-	applymovement LOCALID_PROF_OAK, PalletTown_Movement_OakEnterLeft
-	waitmovement 0
-	return
+PalletTown_Movement_SomehowThisPreventsASoftlock::
+    step_end
 
-PalletTown_EventScript_OakEnterRight::
-	applymovement LOCALID_PROF_OAK, PalletTown_Movement_OakEnterRight
-	waitmovement 0
-	return
+PalletTown_Movement_PidgeyJump::
+    jump_in_place_right
+    step_end
 
-PalletTown_EventScript_OakEnterFarRight::
-	applymovement LOCALID_PROF_OAK, PalletTown_Movement_OakEnterFarRight
-	waitmovement 0
-	return
-
-PalletTown_EventScript_OakLeadPlayerToLabFarLeft::
-	applymovement LOCALID_PROF_OAK, PalletTown_Movement_OakWalkToLabFarLeft
-	applymovement OBJ_EVENT_ID_PLAYER, PalletTown_Movement_PlayerWalkToLabFarLeft
-	waitmovement 0
-	return
-
-PalletTown_EventScript_OakLeadPlayerToLabLeft::
-	applymovement LOCALID_PROF_OAK, PalletTown_Movement_OakWalkToLabLeft
-	applymovement OBJ_EVENT_ID_PLAYER, PalletTown_Movement_PlayerWalkToLabLeft
-	waitmovement 0
-	return
-
-PalletTown_EventScript_OakLeadPlayerToLabRight::
-	applymovement LOCALID_PROF_OAK, PalletTown_Movement_OakWalkToLabRight
-	applymovement OBJ_EVENT_ID_PLAYER, PalletTown_Movement_PlayerWalkToLabRight
-	waitmovement 0
-	return
-
-PalletTown_EventScript_OakLeadPlayerToLabFarRight::
-	applymovement LOCALID_PROF_OAK, PalletTown_Movement_OakWalkToLabFarRight
-	applymovement OBJ_EVENT_ID_PLAYER, PalletTown_Movement_PlayerWalkToLabFarRight
-	waitmovement 0
-	return
-
-PalletTown_Movement_OakEnterFarLeft::
-	walk_left
+PalletTown_Movement_PidgeyLeave::
     walk_up
-	walk_up
-	walk_up
-	walk_up
-    walk_left
-	walk_up
-	step_end
-
-PalletTown_Movement_OakEnterLeft::
-	walk_left
     walk_up
-	walk_up
-	walk_up
-	walk_up
-	walk_up
-	step_end
+    walk_up
+    walk_up
+    walk_up
+    walk_up
+    step_end
 
-PalletTown_Movement_OakEnterRight::
-	walk_up
-	walk_up
-	walk_up
-	walk_up
-	walk_up
-	step_end
-
-PalletTown_Movement_OakEnterFarRight::
-	walk_up
-	walk_up
-	walk_up
-	walk_up
+PalletTown_Movement_PlayerEnterGrassFarLeft::
     walk_right
-	walk_up
+    walk_up
+    walk_right
+    walk_in_place_up
+    step_end
+
+PalletTown_Movement_PlayerEnterGrassLeft::
+    walk_right
+    walk_up
+    walk_in_place_up
+    step_end
+
+PalletTown_Movement_PlayerEnterGrassRight::
+    walk_up
+    step_end
+
+PalletTown_Movement_PlayerEnterGrassFarRight::
+    walk_up
+    walk_left
+    walk_in_place_up
+    step_end
+
+PalletTown_Movement_OakStartWalkingToLabFromGrass::
+	walk_left
+    walk_down
 	step_end
 
-	.macro walk_to_lab
-	walk_down
+.macro walk_to_lab_from_grass
+    walk_down
 	walk_down
 	walk_down
 	walk_down
@@ -386,38 +406,19 @@ PalletTown_Movement_OakEnterFarRight::
     walk_right
 	walk_right
     walk_up
-	.endm
+    .endm
 
-PalletTown_Movement_OakWalkToLabFarLeft::
-	walk_down
-    walk_right
-	walk_to_lab
+PalletTown_Movement_OakWalkToLabFromGrass::
+    walk_down
+	walk_to_lab_from_grass
     walk_up
 	walk_in_place_faster_up
 	step_end
 
-PalletTown_Movement_OakWalkToLabLeft::
-	walk_down
-	walk_to_lab
-    walk_up
-	walk_in_place_faster_up
-	step_end
-
-PalletTown_Movement_OakWalkToLabRight::
-	walk_down
-	walk_left
-	walk_to_lab
-    walk_up
-	walk_in_place_faster_up
-	step_end
-
-PalletTown_Movement_OakWalkToLabFarRight::
-	walk_down
-	walk_left
+PalletTown_Movement_PlayerWalkToLabFromGrass::
     walk_left
-	walk_to_lab
-    walk_up
-	walk_in_place_faster_up
+    walk_down
+	walk_to_lab_from_grass
 	step_end
 
 PalletTown_Movement_OakEnterLab::
@@ -425,36 +426,9 @@ PalletTown_Movement_OakEnterLab::
 	set_invisible
 	step_end
 
-PalletTown_Movement_PlayerWalkToLabFarLeft::
-	walk_down
-	walk_down
-    walk_right
-	walk_to_lab
-	step_end
-
-PalletTown_Movement_PlayerWalkToLabLeft::
-	walk_down
-	walk_down
-	walk_to_lab
-	step_end
-
-PalletTown_Movement_PlayerWalkToLabRight::
-	walk_down
-	walk_down
-	walk_left
-	walk_to_lab
-	step_end
-
-PalletTown_Movement_PlayerWalkToLabFarRight::
-	walk_down
-	walk_down
-	walk_left
-    walk_left
-	walk_to_lab
-	step_end
-
 PalletTown_Movement_PlayerEnterLab::
 	walk_up
+    walk_up
 	set_invisible
 	step_end
 
