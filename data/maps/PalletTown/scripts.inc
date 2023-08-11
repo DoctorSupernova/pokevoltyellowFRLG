@@ -261,9 +261,6 @@ PalletTown_EventScript_PikachuEncounterTrigger::
     applymovement LOCALID_PIDGEY, PalletTown_Movement_PidgeyJump
     playse SE_LEDGE
     waitmovement 0
-    applymovement LOCALID_PIDGEY, PalletTown_Movement_PidgeyJump
-    playse SE_LEDGE
-    waitmovement 0
     applymovement LOCALID_PIDGEY, Common_Movement_QuestionMark
     playmoncry SPECIES_PIDGEY, CRY_MODE_ENCOUNTER
 	delay 30
@@ -273,6 +270,16 @@ PalletTown_EventScript_PikachuEncounterTrigger::
 	delay 30
     msgbox PalletTown_Text_OakSaysGoodbyeToPidgey
 	closemessage
+    applymovement LOCALID_PIDGEY, PalletTown_Movement_PidgeyJump
+    playse SE_LEDGE
+    waitmovement 0
+    applymovement LOCALID_PIDGEY, PalletTown_Movement_PidgeyJump
+    playse SE_LEDGE
+    waitmovement 0
+    applymovement LOCALID_PIDGEY, PalletTown_Movement_PidgeySmile
+    playmoncry SPECIES_PIDGEY, CRY_MODE_ENCOUNTER
+	delay 30
+    waitmovement 0
     applymovement LOCALID_PIDGEY, PalletTown_Movement_PidgeyLeave
     delay 30
     applymovement LOCALID_PROF_OAK, Common_Movement_WalkInPlaceFasterDown
@@ -288,6 +295,13 @@ PalletTown_EventScript_PikachuEncounterTrigger::
     call_if_eq VAR_TEMP_1, 2, PalletTown_EventScript_PlayerEnterGrassRight
 	call_if_eq VAR_TEMP_1, 3, PalletTown_EventScript_PlayerEnterGrassFarRight
     delay 30
+    msgbox PalletTown_Text_OakGetsApproached
+	closemessage
+    playmoncry SPECIES_PIKACHU, CRY_MODE_ENCOUNTER
+	delay 30
+	waitmoncry
+    applymovement LOCALID_PROF_OAK, Common_Movement_ExclamationMark
+	waitmovement 0
     msgbox PalletTown_Text_OakGetsAttacked
 	closemessage
     special StartOldManTutorialBattle
@@ -343,6 +357,10 @@ PalletTown_Movement_SomehowThisPreventsASoftlock::
 
 PalletTown_Movement_PidgeyJump::
     jump_in_place_right
+    step_end
+
+PalletTown_Movement_PidgeySmile::
+    emote_smile
     step_end
 
 PalletTown_Movement_PidgeyLeave::

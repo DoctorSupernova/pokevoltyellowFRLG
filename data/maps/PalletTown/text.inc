@@ -20,12 +20,14 @@ PalletTown_Text_OakSaysGoodbyeToPidgey::
 PalletTown_Text_OakSeesPlayer::
     .string "{PLAYER}?!$"
 
-PalletTown_Text_OakGetsAttacked::
+PalletTown_Text_OakGetsApproached::
     .string "Hey! Wait!\n"
     .string "Don't come closer!\p"
     .string "What's gotten into you?\p"
     .string "It's unsafe! Wild POKéMON\n"
-    .string "live in the tall grass!\p"
+    .string "live in the tall grass!$"
+
+PalletTown_Text_OakGetsAttacked::
     .string "Hmm? Wh-what's that?!$"
 
 PalletTown_Text_OakPostCatch::
