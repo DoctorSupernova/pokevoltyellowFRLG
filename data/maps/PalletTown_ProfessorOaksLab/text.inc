@@ -85,9 +85,86 @@ PalletTown_ProfessorOaksLab_Text_OakThreeMonsChooseOne::
     .string "You can have one.\n"
     .string "Go on, choose!$"
 
+PalletTown_ProfessorOaksLab_Text_OakSeesRival::
+    .string "OAK: Hmm? {RIVAL}?\n"
+    .string "Why are you here already?\p"
+    .string "I told you to come by later…$"
+
+PalletTown_ProfessorOaksLab_Text_RivalSulk::
+    .string "{RIVAL}: What, so you don't\n"
+    .string "appreciate how early I am?$"
+
+PalletTown_ProfessorOaksLab_Text_OakGoGetEevee::
+    .string "OAK: It's not that I…\p"
+    .string "Ah, whatever! Your timing couldn't be\n"
+    .string "better. Just wait there a moment.\p"
+    .string "Look, {PLAYER}!\n"
+    .string "There's a POKéMON on the table.\p"
+    .string "Haha!\p"
+    .string "The POKéMON is held inside\n"
+    .string "that POKé BALL.\p"
+    .string "When I was young, I was a serious\n"
+    .string "POKéMON TRAINER.\p"
+    .string "But now, in my old age, I have\n"
+    .string "only have a few left.\p"
+    .string "You can have this one.\n"
+    .string "Go on, take it!$"
+
+PalletTown_ProfessorOaksLab_Text_OakWillGiveToRival::
+    .string "OAK: Be patient, {RIVAL}.\n"
+    .string "I'll have yours ready for you later.$"
+
 PalletTown_ProfessorOaksLab_Text_OakBePatientRival::
     .string "OAK: Be patient, {RIVAL}.\n"
     .string "You can have one, too!$"
+
+PalletTown_ProfessorOaksLab_Text_RivalTakeTheEevee::
+    .string "{RIVAL}: Heh, I don't need to be\n"
+    .string "greedy like you. I'm mature!\p"
+    .string "I'm sure it's weak anyway.\n"
+    .string "Go ahead, {PLAYER}!$"
+
+PalletTown_ProfessorOaksLab_Text_OakTakeTheEevee::
+    .string "OAK: Go on, take it!\n"
+    .string "It's yours.$"
+
+PalletTown_ProfessorOaksLab_Text_OakChoosingEevee::
+    .string "{PLAYER}, this is the\n"
+    .string "NORMAL POKéMON EEVEE!$"
+
+PalletTown_ProfessorOaksLab_Text_RivalGrabsEevee::
+    .string "{RIVAL}: No way! {PLAYER}, I want\n"
+    .string "this POKéMON!$"
+
+PalletTown_ProfessorOaksLab_Text_RivalSnatchedTheEevee::
+    .string "{RIVAL} snatched the EEVEE!$"
+
+PalletTown_ProfessorOaksLab_Text_OakShocked::
+    .string "OAK: {RIVAL}!!\n"
+    .string "What are you doing!?$"
+
+PalletTown_ProfessorOaksLab_Text_RivalHasEevee::
+    .string "{RIVAL}: You were going to give\n"
+    .string "{PLAYER} this EEVEE?\p"
+    .string "Fat chance! Gramps, I want this\n"
+    .string "POKéMON!$"
+
+PalletTown_ProfessorOaksLab_Text_OakRelentsToRival::
+    .string "OAK: But I…\p"
+    .string "Oh, all right then. That POKéMON\n"
+    .string "is yours.\p"
+    .string "I was going to give you one\n"
+    .string "anyway…\p"
+    .string "{PLAYER}, come over here.$"
+
+PalletTown_ProfessorOaksLab_Text_OakGivesPikachu::
+    .string "{PLAYER}, this is the POKéMON\n"
+    .string "I caught earlier. You can have it.\p"
+    .string "I just caught it in the wild, so\n"
+    .string "it's not tame yet.\p"
+    .string "But it feels like fate, giving you\n"
+    .string "the PIKACHU you said you saw.\p"
+    .string "Take it, {PLAYER}!$"
 
 PalletTown_ProfessorOaksLab_Text_OakWhichOneWillYouChoose::
     .string "OAK: Now, {PLAYER}.\p"

@@ -309,7 +309,7 @@ PalletTown_EventScript_PikachuEncounterTrigger::
     lock
     msgbox PalletTown_Text_OakPostCatch
 	closemessage
-    playbgm MUS_FOLLOW_ME, 0
+    playbgm MUS_OAK, 0
 	call PalletTown_EventScript_OakLeadPlayerToLabFromGrass
     opendoor 23, 15
 	waitdooranim
